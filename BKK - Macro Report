@@ -1,0 +1,81 @@
+Private Sub CommandButton1_Click()
+
+Sheets("Balance Sheet").Visible = True
+Sheets("DataTable").Visible = True
+
+Sheets("Balance Sheet").Select
+Range("A1").Select
+ActiveSheet.Paste
+ulbs = Cells(Rows.Count, 1).End(xlUp).Row
+
+Cells.Select
+Selection.UnMerge
+Selection.NumberFormat = "General"
+
+Range("L7").Select
+ActiveCell.FormulaLocal = "=C7&D7&E7&F7&G7&H7&I7&J7"
+Selection.Copy
+Range("L8:L" & ulbs).Select
+Selection.PasteSpecial Paste:=xlPasteFormulas
+
+Range("A8:A" & ulbs).Select
+Selection.Copy
+Sheets("DataTable").Select
+uldt = Cells(Rows.Count, 1).End(xlUp).Row
+Range("C" & uldt + 1).Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+:=False, Transpose:=False
+
+Sheets("Balance Sheet").Select
+Range("L8:L" & ulbs).Select
+Selection.Copy
+Sheets("DataTable").Select
+Range("D" & uldt + 1).Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+:=False, Transpose:=False
+
+Sheets("Balance Sheet").Select
+Range("N8:N" & ulbs).Select
+Selection.Copy
+Sheets("DataTable").Select
+Range("E" & uldt + 1).Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+:=False, Transpose:=False
+
+Sheets("Balance Sheet").Select
+Range("O8:O" & ulbs).Select
+Selection.Copy
+Sheets("DataTable").Select
+Range("F" & uldt + 1).Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+:=False, Transpose:=False
+
+Sheets("Balance Sheet").Select
+Range("R8:R" & ulbs).Select
+Selection.Copy
+Sheets("DataTable").Select
+Range("G" & uldt + 1).Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+:=False, Transpose:=False
+
+uldt2 = Cells(Rows.Count, 3).End(xlUp).Row
+
+Range("A" & uldt + 1 & ":A" & uldt2).Value = cbb_Mês.Value
+Range("B" & uldt + 1 & ":B" & uldt2).Value = cbb_Ano.Value
+
+Range("H2").Select
+ActiveCell.FormulaLocal = "=A2&B2&"" - ""&C2"
+Selection.Copy
+Range("H2:H" & uldt2).Select
+Selection.PasteSpecial Paste:=xlPasteFormulas
+
+Sheets("Balance Sheet").Select
+Cells.Select
+Selection.Delete Shift:=xlUp
+
+Sheets("Balance Sheet").Visible = False
+Sheets("DataTable").Visible = False
+
+Me.Hide
+
+End Sub
